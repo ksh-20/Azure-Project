@@ -41,3 +41,49 @@ def fetch_repositories():
         "count": len(repos),
         "repositories": repos
     }
+
+
+def fetch_files(repo_id):
+    url = f"https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repo_id}/items?recursionLevel=Full&api-version=7.1"
+    auth = HTTPBasicAuth("", pat)
+
+    response = requests.get(url, auth=auth)
+
+    print("Status:", response.status_code)
+    print("Headers:", response.headers.get("Content-Type"))
+    print("Response:")
+    print(response.text)
+
+    return response.text
+
+
+def fetch_commits():
+    url = url = f"https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repo_id}/commits?api-version=7.1"
+    auth = HTTPBasicAuth("", pat)
+
+    response = requests.get(url, auth=auth)
+
+    if response.status_code != 200:
+        return response.json()
+    
+    commits = []
+    
+    for commit in response.json()["value"]:
+        commits.append({
+            "commitId" : commit["commitId"],
+            "author" : commit["author"]["name"],
+            "email" : commit["author"]["email"],
+            "date" : commit["author"]["date"],
+            "comment" : commit.get("comment")
+        })
+
+    return commits
+
+
+# Below is for testing the functions only. Use Flask API endpoints to test for integration
+
+res = fetch_repositories()
+for key in res:
+    print(key, ":", res[key])
+
+print(fetch_files("968d7613-f79f-4b56-80e9-c6ccccda13d8"))

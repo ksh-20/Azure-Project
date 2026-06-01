@@ -1,14 +1,14 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 
-from azure_service import fetch_repositories
+from azure_service import fetch_repositories, fetch_files
 
 app = Flask(__name__)
 
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 
-@app.route("/api/repo", methods=["GET"])
+@app.route("/api/repos", methods=["GET"])
 def get_repositories():
     result = fetch_repositories()
     return jsonify(result)
