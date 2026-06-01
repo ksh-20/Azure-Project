@@ -77,7 +77,11 @@ def fetch_commits(repo_id):
             "comment" : commit.get("comment")
         })
 
-    return commits
+    return {
+        "success": True,
+        "count": len(commits),
+        "commits": commits
+    }
 
 
 def fetch_pushes(repo_id):
@@ -98,7 +102,11 @@ def fetch_pushes(repo_id):
             "pushedBy" : push["pushedBy"]["displayName"]
         })
 
-    return pushes
+    return {
+        "success": True,
+        "count": len(pushes),
+        "pushes": pushes
+    }
 
 
 def fetch_branches(repo_id):
@@ -118,7 +126,11 @@ def fetch_branches(repo_id):
             "objectId" : branch["objectId"]
         })
 
-    return branches
+    return {
+        "success": True,
+        "count": len(branches),
+        "branches": branches
+    }
 
 
 def fetch_tags(repo_id):
@@ -138,7 +150,11 @@ def fetch_tags(repo_id):
             "objectId" : tag["objectId"]
         })
 
-    return tags
+    return {
+        "success": True,
+        "count": len(tags),
+        "tags": tags
+    }
 
 
 def fetch_pull_requests(repo_id):
@@ -163,7 +179,11 @@ def fetch_pull_requests(repo_id):
             "targetBranch": pr["targetRefName"]
         })
 
-    return prs
+    return {
+        "success": True,
+        "count": len(prs),
+        "pull requests": prs
+    }
 
 
 
