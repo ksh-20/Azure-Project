@@ -91,7 +91,7 @@ def fetch_pushes(repo_id):
     response = requests.get(url, auth=auth)
 
     if response.status_code != 200:
-        return response.json
+        return response.json()
     
     pushes = []
 
@@ -188,9 +188,4 @@ def fetch_pull_requests(repo_id):
 
 
 # Below is for testing the functions only. Use Flask API endpoints to test for integration
-
-res = fetch_repositories()
-for key in res:
-    print(key, ":", res[key])
-
-print(fetch_files("968d7613-f79f-4b56-80e9-c6ccccda13d8"))
+# print(fetch_files("968d7613-f79f-4b56-80e9-c6ccccda13d8"))
