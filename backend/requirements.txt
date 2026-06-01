@@ -1,9 +1,6 @@
-numpy
-pandas
 requests
-Flask
-flask-cors
-flask-restx
+fastapi
+uvicorn
 dotenv
 azure-devops
 msrest

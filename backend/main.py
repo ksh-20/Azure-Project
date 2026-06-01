@@ -1,18 +1,26 @@
-from flask import Flask, jsonify
-from flask_cors import CORS
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 
 from backend.repository import fetch_repositories
 
-app = Flask(__name__)
+app = FastAPI()
 
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
-@app.route("/api/repos", methods=["GET"])
-def get_repositories():
+@app.get("/api/repos")
+async def get_repositories():
     result = fetch_repositories()
-    return jsonify(result)
+    return result
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    uvicorn.run("main:app", host="0.0.0.0", port=5000, reload=True)
