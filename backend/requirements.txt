@@ -1,0 +1,9 @@
+numpy
+pandas
+requests
+Flask
+flask-cors
+flask-restx
+dotenv
+azure-devops
+msrest
