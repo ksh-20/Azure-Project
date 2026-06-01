@@ -80,6 +80,94 @@ def fetch_commits():
     return commits
 
 
+def fetch_pushes():
+    url = f"https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repo_id}/pushes?api-version=7.1"
+    auth = HTTPBasicAuth("", pat)
+
+    response = requests.get(url, auth=auth)
+
+    if response.status_code != 200:
+        return response.json
+    
+    pushes = []
+
+    for push in response.json()["value"]:
+        pushes.append({
+            "pushId" : push["pushId"],
+            "date" : push["date"],
+            "pushedBy" : push["pushedBy"]["displayName"]
+        })
+
+    return pushes
+
+
+def fetch_branches():
+    url = f"https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repo_id}/refs?filter=heads/&api-version=7.1"
+    auth = HTTPBasicAuth("", pat)
+
+    response = requests.get(url, auth=auth)
+
+    if response.status_code != 200:
+        return response.json()
+    
+    branches = []
+
+    for branch in response.json()["value"]:
+        branches.append({
+            "name" : branch["name"],
+            "objectId" : branch["objectId"]
+        })
+
+    return branches
+
+
+def fetch_tags():
+    url = f"https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repo_id}/refs?filter=tags/&api-version=7.1"
+    auth = HTTPBasicAuth("", pat)
+
+    response = requests.get(url, auth=auth)
+
+    if response.status_code != 200:
+        return response.json()
+    
+    tags = []
+
+    for tag in response.json()["value"]:
+        tags.append({
+            "name" : tag["name"],
+            "objectId" : tag["objectId"]
+        })
+
+    return tags
+
+
+def fetch_pull_requests():
+    url = f"https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repo_id}/pullrequests?searchCriteria.status=all&api-version=7.1"
+    auth = HTTPBasicAuth("", pat)
+
+    response = requests.get(url=url, auth=auth)
+
+    if response.status_code != 200:
+        return response.json()
+    
+    prs = []
+
+    for pr in response.json()["value"]:
+        prs.append({
+            "pullRequestId": pr["pullRequestId"],
+            "title": pr["title"],
+            "status": pr["status"],
+            "createdBy": pr["createdBy"]["displayName"],
+            "creationDate": pr["creationDate"],
+            "sourceBranch": pr["sourceRefName"],
+            "targetBranch": pr["targetRefName"]
+        })
+
+    return prs
+
+
+
+
 # Below is for testing the functions only. Use Flask API endpoints to test for integration
 
 res = fetch_repositories()
