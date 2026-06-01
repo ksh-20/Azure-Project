@@ -2,7 +2,7 @@ from flask import Flask
 from flask_restx import Api, Resource, fields
 from flask_cors import CORS
 
-from azure_service import fetch_repositories
+from backend.repository import fetch_repositories
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})

@@ -57,7 +57,7 @@ def fetch_files(repo_id):
     return response.text
 
 
-def fetch_commits():
+def fetch_commits(repo_id):
     url = url = f"https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repo_id}/commits?api-version=7.1"
     auth = HTTPBasicAuth("", pat)
 
@@ -80,7 +80,7 @@ def fetch_commits():
     return commits
 
 
-def fetch_pushes():
+def fetch_pushes(repo_id):
     url = f"https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repo_id}/pushes?api-version=7.1"
     auth = HTTPBasicAuth("", pat)
 
@@ -101,7 +101,7 @@ def fetch_pushes():
     return pushes
 
 
-def fetch_branches():
+def fetch_branches(repo_id):
     url = f"https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repo_id}/refs?filter=heads/&api-version=7.1"
     auth = HTTPBasicAuth("", pat)
 
@@ -121,7 +121,7 @@ def fetch_branches():
     return branches
 
 
-def fetch_tags():
+def fetch_tags(repo_id):
     url = f"https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repo_id}/refs?filter=tags/&api-version=7.1"
     auth = HTTPBasicAuth("", pat)
 
@@ -141,7 +141,7 @@ def fetch_tags():
     return tags
 
 
-def fetch_pull_requests():
+def fetch_pull_requests(repo_id):
     url = f"https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repo_id}/pullrequests?searchCriteria.status=all&api-version=7.1"
     auth = HTTPBasicAuth("", pat)
 

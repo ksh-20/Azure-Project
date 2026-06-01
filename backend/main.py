@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 
-from azure_service import fetch_repositories, fetch_files
+from backend.repository import fetch_repositories
 
 app = Flask(__name__)
 
