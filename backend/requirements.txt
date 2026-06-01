@@ -1,6 +1,7 @@
 requests
 fastapi
 uvicorn
+pydantic
 dotenv
 azure-devops
 msrest

@@ -2,7 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
-from backend.repository import fetch_repositories
+from repository import fetch_repositories
+from project import fetch_projects
 
 app = FastAPI()
 
@@ -16,6 +17,11 @@ app.add_middleware(
 )
 
 
+@app.get("/api/projects")
+async def get_projects():
+    result = fetch_projects()
+    return result
+
 @app.get("/api/repos")
 async def get_repositories():
     result = fetch_repositories()
@@ -23,4 +29,4 @@ async def get_repositories():
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=5000, reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=5000, reload=True)
