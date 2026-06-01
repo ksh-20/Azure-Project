@@ -167,7 +167,6 @@ def fetch_pull_requests():
 
 
 
-
 # Below is for testing the functions only. Use Flask API endpoints to test for integration
 
 res = fetch_repositories()
