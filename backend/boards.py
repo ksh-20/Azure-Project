@@ -63,16 +63,10 @@ def fetch_work_items(project):
             "title": fields.get("System.Title"),
             "type": fields.get("System.WorkItemType"),
             "state": fields.get("System.State"),
-            "assignedTo":
-                fields.get("System.AssignedTo", {})
-                .get("displayName")
-                if isinstance(
-                    fields.get("System.AssignedTo"),
-                    dict
-                )
+            "assignedTo": fields.get("System.AssignedTo", {}).get("displayName")
+                if isinstance(fields.get("System.AssignedTo"),dict)
                 else None,
-            "createdDate":
-                fields.get("System.CreatedDate")
+            "createdDate": fields.get("System.CreatedDate")
         })
 
     return {

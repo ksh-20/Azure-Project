@@ -4,6 +4,7 @@ import uvicorn
 
 from repository import fetch_repositories
 from project import fetch_projects
+from pipelines import fetch_pipelines
 
 app = FastAPI()
 
@@ -27,6 +28,10 @@ async def get_repositories():
     result = fetch_repositories()
     return result
 
+@app.get("/api/pipelines")
+async def get_pipelines():
+    result = fetch_pipelines()
+    return result
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
