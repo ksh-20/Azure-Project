@@ -187,5 +187,5 @@ def fetch_pull_requests(repo_id):
 
 
 
-# Below is for testing the functions only. Use Flask API endpoints to test for integration
+# Below is for testing the functions only. Use FastAPI API endpoints to test for integration
 # print(fetch_files("968d7613-f79f-4b56-80e9-c6ccccda13d8"))
