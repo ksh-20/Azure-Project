@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 organization = os.getenv("AZURE_ORG")
-project = os.getenv("AZURE_PROJECT")
 pat = os.getenv("AZURE_PAT")
 
 
