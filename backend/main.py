@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
@@ -29,40 +29,107 @@ app.add_middleware(
 @app.get("/api/projects")
 async def get_projects():
     result = fetch_projects()
+    
+    if not result["success"]:
+        raise HTTPException(
+            status_code=result["status_code"],
+            detail=result["error"]
+        )
+    
     return result
 
 @app.get("/api/repos")
 async def get_repositories():
     result = fetch_repositories()
+
+    if not result["success"]:
+        raise HTTPException(
+            status_code=result["status_code"],
+            detail=result["error"]
+        )
+    
     return result
 
 @app.get("/api/repos/{repo_id}/files")
 async def get_files(repo_id: str):
-    return fetch_files(repo_id)
+    result = fetch_files(repo_id)
+
+    if not result["success"]:
+        raise HTTPException(
+            status_code=result["status_code"],
+            detail=result["error"]
+        )
 
 @app.get("/api/repos/{repo_id}/commits")
 async def get_commits(repo_id: str):
-    return fetch_commits(repo_id)
+    result = fetch_commits(repo_id)
+
+    if not result["success"]:
+        raise HTTPException(
+            status_code=result["status_code"],
+            detail=result["error"]
+        )
+    
+    return result
 
 @app.get("/api/repos/{repo_id}/pushes")
 async def get_pushes(repo_id: str):
-    return fetch_pushes(repo_id)
+    result = fetch_pushes(repo_id)
+
+    if not result["success"]:
+        raise HTTPException(
+            status_code=result["status_code"],
+            detail=result["error"]
+        )
+    
+    return result
 
 @app.get("/api/repos/{repo_id}/branches")
 async def get_branches(repo_id: str):
-    return fetch_branches(repo_id)
+    result = fetch_branches(repo_id)
+
+    if not result["success"]:
+        raise HTTPException(
+            status_code=result["status_code"],
+            detail=result["error"]
+        )
+    
+    return result
 
 @app.get("/api/repos/{repo_id}/tags")
 async def get_tags(repo_id: str):
-    return fetch_tags(repo_id)
+    result = fetch_tags(repo_id)
+
+    if not result["success"]:
+        raise HTTPException(
+            status_code=result["status_code"],
+            detail=result["error"]
+        )
+    
+    return result
 
 @app.get("/api/repos/{repo_id}/pullrequests")
 async def get_pull_requests(repo_id: str):
-    return fetch_pull_requests(repo_id)
+    result = fetch_pull_requests(repo_id)
+
+    if not result["success"]:
+        raise HTTPException(
+            status_code=result["status_code"],
+            detail=result["error"]
+        )
+    
+    return result
 
 @app.get("/api/pipelines")
 async def get_pipelines():
     result = fetch_pipelines()
+    
+    if not result["success"]:
+        raise HTTPException(
+            status_code=result["status_code"],
+            detail=result["error"]
+        )
+
     return result
 
 

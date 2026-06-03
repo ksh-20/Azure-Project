@@ -18,9 +18,9 @@ def fetch_pipelines():
 
     if response.status_code != 200:
         return {
-            "success" : False,
-            "status_code" : response.status_code,
-            "error" : response.text
+            "success": False,
+            "status_code": response.status_code,
+            "error": response.json()
         }
     
     pipelines = []
